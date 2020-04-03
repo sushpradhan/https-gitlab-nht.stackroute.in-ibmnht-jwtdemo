@@ -36,7 +36,7 @@ public class JWTFilter implements Filter{
 				throw new ServletException("Missing or Invalid Authorization header");
 			}
 			
-			String token = authHeader.split(" ")[2];			
+			String token = authHeader.split(" ")[1];			
 			try {
 			final Claims claims = Jwts.parser().setSigningKey("secretKey").parseClaimsJws(token).getBody();
 			System.out.println("test2");

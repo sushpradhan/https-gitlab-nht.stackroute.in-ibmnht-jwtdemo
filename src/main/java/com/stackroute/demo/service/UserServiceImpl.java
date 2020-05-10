@@ -30,9 +30,9 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
-	public boolean validate(String username, String password) {
+	public boolean validate(String email, String password) {
 	
-		if(userRepository.validate(username, password) != null ) {
+		if(userRepository.validate(email, password) != null ) {
 			return true;
 		}else {
 			return false;
@@ -40,7 +40,44 @@ public class UserServiceImpl implements UserService {
 	
 	
 	}
-
+	@Override
+	public boolean deleteUser(String email) {
+		try {
+	userRepository.deleteById(email);
+	return true;
+	}catch(Exception f) {
+		return false;
+	}
+	}
 	
+	@Override
+	public boolean updateProfile(User user) {
+		try {
+			if(!userRepository.findById(user.getEmail()).isEmpty()) {
+				userRepository.deleteById(user.getEmail());
+				userRepository.save(user);
+				return true;
+			}
+			return false;
+		}catch(Exception g) {
+			return false;
+		}
+	}
+	
+	
+	
+	@Override
+	public boolean updatePassword(User user) {
+		try {
+			if(!userRepository.findById(user.getEmail()).isEmpty()) {          
+				userRepository.deleteById(user.getEmail());
+				userRepository.save(user);
+				return true;
+			}
+			return false;
+		}catch(Exception h) {
+			return false;
+		}
+	}
 	
 }

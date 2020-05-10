@@ -7,6 +7,8 @@ import com.stackroute.demo.model.User;
 public interface UserService {
 	public List<User> getAllUsers();
 	public boolean addUser(User u);
-	public boolean validate(String username,String password);
-
+	public boolean validate(String email,String password);
+    public boolean deleteUser(String email);
+    public boolean updatePassword(User user);
+    public boolean updateProfile(User user);
 }

@@ -32,11 +32,11 @@ public class JWTFilter implements Filter{
 			filterchain.doFilter(request, response);
 		}else {
 			
-			if(authHeader == null || !authHeader.startsWith("Bearer ")) {
+			if(authHeader == null || !authHeader.startsWith("")) {
 				throw new ServletException("Missing or Invalid Authorization header");
 			}
 			
-			String token = authHeader.split(" ")[1];			
+			String token = authHeader;			
 			try {
 			final Claims claims = Jwts.parser().setSigningKey("secretKey").parseClaimsJws(token).getBody();
 			System.out.println("test2");
